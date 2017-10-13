@@ -142,7 +142,10 @@ int main(){
             }
             if(nsize==2){
                 tip=1;
-                if(score[0]==score[1])printf("本次游戏两人平局\n");
+                if(score[0]==score[1]){
+                    winner=0;
+                    printf("本次游戏两人平局\n");
+                }
                 else if(score[0]>score[1]){
                     printf("本次胜利的玩家是 玩家1\n");
                     winner=1;
@@ -152,8 +155,13 @@ int main(){
                     winner=2;
                 }
             }
-            if(tip==1){
+            if(tip==1&&winner!=0){
                 money[winner-1]=money[winner-1]+cash[0]+cash[1];
+                break;
+            }
+            if(tip==1&&winner==0){
+                money[0]=money[0]+cash[0];
+                money[1]=money[1]+cash[1];
                 break;
             }
             if(i==2)i=0;
@@ -164,7 +172,7 @@ int main(){
             run=1;
             break;
         }
-        if(money[2]==0){
+        if(money[1]==0){
             printf("玩家2请离场，玩家1彻底胜利，拥有总共5000筹码");
             run=1;
             break;
